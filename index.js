@@ -788,6 +788,15 @@ async function starts() {
 						reply('Foto aja mas')
 					}
 					break
+	                      case 'pinterest':
+                                        anoo = body.slice(11) 
+					data = await fetchJson(`https://api.fdci.se/rep.php?gambar=${anoo}`, {method: 'get'})
+					reply(mess.wait)
+					ns = JSON.parse(JSON.stringify(data));
+					nini =  ns[Math.floor(Math.random() * n.length)];
+					anjy = await getBuffer(nini)
+					client.sendMessage(from, anjy, image, { quoted: mek, caption: `*PINTEREST*\n\Hasil Pencarian : ${anoo}`})
+					break
 				default:
 					if (isGroup && isSimi && budy != undefined) {
 						console.log(budy)
