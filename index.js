@@ -116,7 +116,7 @@ async function starts() {
 			const isCmd = body.startsWith(prefix)
 
 			mess = {
-				wait: '⌛ Sedang di Prosess ⌛',
+				wait: 'otewe',
 				success: '✔️ Berhasil ✔️',
 				error: {
 					stick: '❌ Gagal, terjadi kesalahan saat mengkonversi gambar ke sticker ❌',
@@ -797,6 +797,27 @@ async function starts() {
 					anjy = await getBuffer(nini)
 					client.sendMessage(from, anjy, image, { quoted: mek, caption: `*PINTEREST*\n\Hasil Pencarian : ${anoo}`})
 					break
+			    case 'joox':
+                                        reply(mess.wait)
+                                        data = await fetchJson(`https://tobz-api.herokuapp.com/api/joox?q=${body.slice(6)}&apikey=BotWeA`, {method: 'get'})
+                                        if (data.error) return reply(data.error)
+                                        ingfomp3 = `---[PLAY JOOX]---\nJudul : ${data.result.judul}\nAlbum : ${data.result.album}\nDipublikasi : ${data.result.dipublikasi}\n*LAGU LAGI DI KIRIM MOHON TUNGGU*`
+                                        mabar = await getBuffer(data.result.thumb)
+                                        lagu = await getBuffer(data.result.mp3)
+                                        client.sendMessage(from, mabar, image, {quoted: mek, caption: ingfomp3})
+                                        client.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${data.result.title}.mp3`, quoted: mek})
+                                        break
+			   case 'play':   
+                                        reply(mess.wait)
+                                        play = body.slice(5)
+                                        anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?q=${play}&apikey=apivinz`)
+                                        if (anu.error) return reply(anu.error)
+                                        infomp3 = `---[PLAY LAGU]---\nJudul : ${anu.result.title}\nSource : ${anu.result.source}`
+                                        buffer = await getBuffer(anu.result.thumbnail)
+                                        lagu = await getBuffer(anu.result.url_audio)
+                                        client.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
+                                        client.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
+                                        break
 				default:
 					if (isGroup && isSimi && budy != undefined) {
 						console.log(budy)
